@@ -1,7 +1,7 @@
 " Auto add bracket
 let s:AutoBracketEnable = 0
 
-function! ToggleBracketMode()
+function! utils#toggle_bracket_mode()
     if s:AutoBracketEnable
         iunmap {
         iunmap {<Enter>
@@ -10,7 +10,7 @@ function! ToggleBracketMode()
         iunmap '
         iunmap "
         let s:AutoBracketEnable = 0
-        call v:lua.vim.notify("Disable Auto Bracket", "info", {'title': 'neovim config'})
+        call v:lua.vim.notify("Disable Auto Bracket", "info", {'title': 'neovim utils'})
     else
         inoremap { {}<Left>
         inoremap {<Enter> {}<Left><CR><ESC><S-o>
@@ -19,33 +19,31 @@ function! ToggleBracketMode()
         inoremap ' ''<LEFT>
         inoremap " ""<LEFT>
         let s:AutoBracketEnable = 1
-        call v:lua.vim.notify("Enable Auto Bracket", "info", {'title': 'neovim config'})
+        call v:lua.vim.notify("Enable Auto Bracket", "info", {'title': 'neovim utils'})
     endif
 endfunction
-nmap <silent> <Leader>B :call ToggleBracketMode() <CR>
-imap <silent> <Leader>B :call ToggleBracketMode() <CR>
 
 " Copymode -> Toggle hidden char to be visible
-function! CopyModeEnable()
+function! utils#copymode_enable()
   set norelativenumber
   set nonumber
   set nolist
   call gitgutter#disable()
-  call v:lua.vim.notify("Enable Copy Mode", "info", {'title': 'neovim config'})
+  call v:lua.vim.notify("Enable Copy Mode", "info", {'title': 'neovim utils'})
 endfunction
-command! -nargs=0 CopyModeEnable :call CopyModeEnable()
+command! -nargs=0 CopyModeEnable :call utils#copymode_enable()
 
-function! CopyModeDisable()
+function! utils#copymode_disable()
   set relativenumber
   set number
-  set list listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+  set list
   call gitgutter#enable()
-  call v:lua.vim.notify("Disable Copy Mode", "info", {'title': 'neovim config'})
+  call v:lua.vim.notify("Disable Copy Mode", "info", {'title': 'neovim utils'})
 endfunction
-command! -nargs=0 CopyModeDisable :call CopyModeDisable()
+command! -nargs=0 CopyModeDisable :call utils#copymode_disable()
 
 " Hex Modified
-function! HexModeEnable()
+function! utils#hexmode_enable()
   if !executable('xxd')
     echo "xxd not installed."
     return
@@ -54,11 +52,11 @@ function! HexModeEnable()
   set binary
   set noeol
   execute('%!xxd')
-  call v:lua.vim.notify("Enable Hex Mode\nCall :HexModeDisable before save file.", "info", {'title': 'neovim config'})
+  call v:lua.vim.notify("Enable Hex Mode\nCall :HexModeDisable before save file.", "info", {'title': 'neovim utils'})
 endfunction
-command! -nargs=0 HexModeEnable :call HexModeEnable()
+command! -nargs=0 HexModeEnable :call utils#hexmode_enable()
 
-function! HexModeDisable()
+function! utils#hexmode_disable()
   if !executable('xxd')
     echo "xxd not installed."
     return
@@ -66,9 +64,9 @@ function! HexModeDisable()
   execute('%!xxd -r')
   set ft&
   set eol
-  call v:lua.vim.notify("Disable Hex Mode", "info", {'title': 'neovim config'})
+  call v:lua.vim.notify("Disable Hex Mode", "info", {'title': 'neovim utils'})
 endfunction
-command! -nargs=0 HexModeDisable :call HexModeDisable()
+command! -nargs=0 HexModeDisable :call utils#hexmode_disable()
 
 " Clear Additional Space
 command! -nargs=0 ClearSpaces :%s/\s\+$//e

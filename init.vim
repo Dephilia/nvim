@@ -1,7 +1,7 @@
 " @Author: Dephilia <me@dephilia.moe>
 " @Date: 2019-10-17 23:45:54
 " @Last Modified by: Dephilia <me@dephilia.moe>
-" @Last Modified time: 2022-06-15 22:33:00
+" @Last Modified time: 2022-06-16 22:40:15
 
 if !has('nvim-0.7.0')
   echohl Error | echomsg "Nvim 0.7.0 required, but is missing!" | echohl None
@@ -48,24 +48,37 @@ set termguicolors
 lua require('plugins')
 
 " Post Configuration
+" Description: The settings will load after plugins
 "=============================="
 runtime vim/utils.vim
 runtime vim/cscfg.vim
 
 let g:rainbow_active = 1
 let g:SnazzyTransparent = 1
+let g:tokyonight_style = "night"
 
 " Auto command
+" Description: Auto commands
 "=============================="
 augroup dashboard_cfg
   autocmd!
-   autocmd FileType dashboard nnoremap <buffer> <silent> <Leader>fm :Telescope marks<CR>
-   autocmd FileType dashboard nnoremap <buffer> <silent> <Leader>bo :DashboardNewFile<CR>
+  autocmd FileType dashboard nnoremap <buffer> <silent> <Leader>fm :Telescope marks<CR>
+  autocmd FileType dashboard nnoremap <buffer> <silent> <Leader>bo :DashboardNewFile<CR>
 
-   " hide tilde
-   autocmd FileType dashboard setlocal fillchars+=eob:\ 
-   autocmd FileType dashboard setlocal noru
+  " hide tilde
+  autocmd FileType dashboard setlocal fillchars+=eob:\ 
+  autocmd FileType dashboard setlocal noru
 augroup END
+
+" Auto change lualine theme
+augroup colorsheme_chain
+  autocmd!
+  autocmd ColorScheme snazzy     lua require('lualine').setup { options = { theme = require('configs/snazzy') }}
+  autocmd ColorScheme nord       lua require('lualine').setup { options = { theme = 'nord'                    }}
+  autocmd ColorScheme catppuccin lua require('lualine').setup { options = { theme = 'catppuccin'              }}
+  autocmd ColorScheme tokyonight lua require('lualine').setup { options = { theme = 'tokyonight'              }}
+augroup END
+
 " Conflict to fugitive, not use now
 " augroup non_utf8_file_warn
 "   autocmd!
@@ -74,7 +87,13 @@ augroup END
 "         \ endif
 " augroup END
 
+" Hightlight
+" Description: Hightlights
+"=============================="
+hi CursorLine term=bold cterm=bold
+
 " Key mapping
+" Description: The key mappings :)
 "=============================="
 " jj escape
 inoremap <silent> jj <ESC>
@@ -119,7 +138,7 @@ nnoremap <silent> bd :bdelete<CR>
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
-map <silent> <Leader><C-r> <cmd> so $MYVIMRC <bar>
+nmap <silent> <Leader><C-r> <cmd> so $MYVIMRC <bar>
   \ call v:lua.vim.notify("Reload Config", "info", {'title': 'neovim config'}) <CR>
 
 " copy to system clipboard
@@ -132,18 +151,32 @@ nmap <Leader>e <cmd> lua require'hop'.hint_words({ hint_position = require'hop.h
 vmap <Leader>e <cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>
 omap <Leader>e <cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>
 
-" Vim settings
+" utils
+nmap <silent> <Leader>B :call utils#toggle_bracket_mode() <CR>
+
+" hidden char
+nmap <silent> <Leader>H :set list! <CR>
+
+" Default colorsheme
+" Description: Use snazzy default
 "=============================="
-syntax      enable    " Enable syntax
 colorscheme snazzy
 
+" Syntax Enable
+" Description: Enable syntax default
+"=============================="
+syntax enable
+
+" Vim settings
+" Description: The vim's settings
+"=============================="
 set background=dark " background
 set encoding=UTF-8  " coding
 set expandtab       " <tab> as many <space>
 set tabstop=2       " width of tab
 set showtabline=2   " Tabline
 set laststatus=2    " Statusbar
-set noshowmode
+set noshowmode      " hide the -- INSERT --
 set shiftwidth=2    " indent width
 set softtabstop=2   " how many space insert after press tab
 set cmdheight=2     " Higher cmd line
@@ -156,30 +189,29 @@ set relativenumber  " show relative line number
 set number          " show line number
 set cursorline      " highlight current line
 set hidden          " Hide edited buffer
-hi CursorLine term=bold cterm=bold
-
-" Enable backspace avaliable in Insert mode
-set backspace=indent,eol,start
+set updatetime=300  " Short update time
+set shortmess+=c    " Supress ins-completion msg
+set tags=./tags,./TAGS,tags;~,TAGS;~ " Tags location
 
 " Show hide chars
-set list listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
-
-" Where is the tags file for ctags
-set tags=./tags,./TAGS,tags;~,TAGS;~
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
+set list listchars+=tab:→\ 
+set list listchars+=space:·
+set list listchars+=nbsp:␣
+set list listchars+=trail:•
+set list listchars+=eol:¶
+set list listchars+=precedes:«
+set list listchars+=extends:»
 
 " GUI Settings
+" Description: Only for GUI
 "=============================="
+if has('gui_running')
+  set guifont=Mononoki\ Nerd\ Font\ mono:h14
+endif
 if exists('g:neovide')
   set guifont=Mononoki\ Nerd\ Font\ mono:h14
   let g:neovide_transparency=0.9
-  let g:neovide_cursor_vfx_mode="railgun"
+  let g:neovide_cursor_vfx_mode='railgun'
 endif
 
 " END

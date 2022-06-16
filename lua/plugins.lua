@@ -62,7 +62,12 @@ return require('packer').startup(function(use)
   use { 'aperezdc/vim-template' }
   use { 'junegunn/vim-easy-align' }
   use { 'ahonn/vim-fileheader' }
-  use { 'airblade/vim-gitgutter' }
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
   use { 'itchyny/vim-gitbranch' }
   use { 'psliwka/vim-smoothie' }
   use { 'godlygeek/tabular' }
@@ -70,6 +75,17 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-surround' }
   use { 'tpope/vim-fugitive' }
   use { 'luochen1990/rainbow' }
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function()
+      require("indent_blankline").setup {
+        -- for example, context is off by default, use this to turn it on
+        show_current_context = true,
+        show_current_context_start = true,
+        space_char_blankline = " ",
+      }
+    end
+  }
   use { 'vim-scripts/DoxygenToolkit.vim',
     opt = true,
     cmd = { 'Dox' }
@@ -115,6 +131,12 @@ return require('packer').startup(function(use)
     end
   }
   use {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    requires = {
+      'nvim-treesitter/nvim-treesitter',
+    }
+  }
+  use {
     'liuchengxu/vista.vim',
     opt = true,
     cmd = { 'Vista', 'Vista!!' }
@@ -157,13 +179,12 @@ return require('packer').startup(function(use)
 
   -- Themes
   use { 'connorholyday/vim-snazzy' }
-  use { 'arcticicestudio/nord-vim', opt = true }
+  use { 'arcticicestudio/nord-vim' }
   use {
     "catppuccin/nvim",
-    as = "catppuccin",
-    opt = true
+    as = "catppuccin"
   }
-  use { 'folke/tokyonight.nvim', opt = true }
+  use { 'folke/tokyonight.nvim' }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

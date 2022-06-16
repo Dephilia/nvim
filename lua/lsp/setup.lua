@@ -140,7 +140,11 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+  if vim.fn.has('nvim-0.8.0') == 1 then
+    vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+  else
+    vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+  end
 end
 
 local lua_settings = {
