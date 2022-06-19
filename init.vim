@@ -1,7 +1,7 @@
 " @Author: Dephilia <me@dephilia.moe>
 " @Date: 2019-10-17 23:45:54
 " @Last Modified by: Dephilia <me@dephilia.moe>
-" @Last Modified time: 2022-06-19 22:41:37
+" @Last Modified time: 2022-06-19 23:12:05
 
 if !has('nvim-0.7.0')
   echohl Error | echomsg "Nvim 0.7.0 required, but is missing!" | echohl None
@@ -82,11 +82,12 @@ augroup END
 " Fix telescope will make ts folding expr unusable
 " Delete this until telescope fix the bug
 " Follow https://github.com/nvim-telescope/telescope.nvim/issues/699
-augroup telescope_fix_folding
-  autocmd!
-  autocmd BufEnter * normal! zx " Update folding expr
-  autocmd BufEnter * normal! zR " And open all folding
-augroup END
+" Currently, folding expr is broken, so I disable it.
+" augroup telescope_fix_folding
+"   autocmd!
+"   autocmd BufEnter * normal! zx " Update folding expr
+"   autocmd BufEnter * normal! zR " And open all folding
+" augroup END
 
 " Conflict to fugitive, not use now
 " augroup non_utf8_file_warn
@@ -224,8 +225,9 @@ set list listchars+=precedes:«
 set list listchars+=extends:»
 
 " Folding
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+" Broken currently, enable it will make TS and LSP unavaliable
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
 
 " GUI Settings
 " Description: Only for GUI
