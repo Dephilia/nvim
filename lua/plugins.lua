@@ -166,6 +166,12 @@ return require('packer').startup(function(use)
       require('lspsaga').init_lsp_saga()
     end
   }
+
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+  }
+
   -- fzf, the fuzzy finder
   use {
     'junegunn/fzf.vim',

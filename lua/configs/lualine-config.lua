@@ -6,6 +6,7 @@
 -- Distributed under terms of the MIT license.
 
 local snazzy = require('configs/snazzy')
+local navic = require("nvim-navic")
 
 local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
   return function(str)
@@ -39,7 +40,8 @@ require('lualine').setup {
       'diff', 'diagnostics'
     },
     lualine_c = {
-      { 'filename', fmt = trunc(90, 30, 80) },
+      -- { 'filename', fmt = trunc(90, 30, 80) },
+      { navic.get_location, cond = navic.is_available },
     },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
