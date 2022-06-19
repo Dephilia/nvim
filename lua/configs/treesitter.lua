@@ -4,8 +4,7 @@
 -- Copyright (C) 2022 dephilia <dephilia@MacBook-Pro.local>
 --
 -- Distributed under terms of the MIT license.
---
--- local langs = { "c", "cpp", "python", "lua", "rust", "vim" }
+
 local langs = vim.g['treesitter_langs']
 
 require 'nvim-treesitter.configs'.setup {

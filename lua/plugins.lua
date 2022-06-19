@@ -115,15 +115,6 @@ return require('packer').startup(function(use)
   use { 'sheerun/vim-polyglot', opt = true }
 
   use {
-    'williamboman/nvim-lsp-installer'
-  }
-  use {
-    'neovim/nvim-lspconfig',
-    config = function()
-      require('lsp/setup')
-    end
-  }
-  use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function()
@@ -143,6 +134,16 @@ return require('packer').startup(function(use)
   }
   use { 'simrat39/symbols-outline.nvim', opt = true, cmd = { 'SymbolsOutline' } }
 
+  -- LSP
+  use {
+    'williamboman/nvim-lsp-installer'
+  }
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('lsp/setup')
+    end
+  }
   use {
     'hrsh7th/nvim-cmp',
     config = function()
@@ -158,6 +159,12 @@ return require('packer').startup(function(use)
       { 'rafamadriz/friendly-snippets' },
       { 'onsails/lspkind-nvim' },
     }
+  }
+  use {
+    'glepnir/lspsaga.nvim',
+    config = function()
+      require('lspsaga').init_lsp_saga()
+    end
   }
   -- fzf, the fuzzy finder
   use {
@@ -177,7 +184,7 @@ return require('packer').startup(function(use)
     }
   }
 
-  -- Themes
+  -- -- Themes
   use { 'connorholyday/vim-snazzy' }
   use { 'arcticicestudio/nord-vim' }
   use {
