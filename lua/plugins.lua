@@ -74,7 +74,6 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-commentary' }
   use { 'tpope/vim-surround' }
   use { 'tpope/vim-fugitive' }
-  use { 'luochen1990/rainbow' }
   use {
     'lukas-reineke/indent-blankline.nvim',
     config = function()
@@ -123,6 +122,12 @@ return require('packer').startup(function(use)
   }
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
+    requires = {
+      'nvim-treesitter/nvim-treesitter',
+    }
+  }
+  use {
+    'p00f/nvim-ts-rainbow',
     requires = {
       'nvim-treesitter/nvim-treesitter',
     }
