@@ -1,7 +1,7 @@
 " @Author: Dephilia <me@dephilia.moe>
 " @Date: 2019-10-17 23:45:54
 " @Last Modified by: Dephilia <me@dephilia.moe>
-" @Last Modified time: 2022-06-20 21:53:02
+" @Last Modified time: 2022-06-20 22:09:11
 
 if !has('nvim-0.7.0')
   echohl Error | echomsg "Nvim 0.7.0 required, but is missing!" | echohl None
@@ -161,9 +161,6 @@ omap <Leader>e <cmd> lua require'hop'.hint_words({ hint_position = require'hop.h
 
 " cscope mappings
 " See vim/cscfg.vim
-
-" lspsaga
-nnoremap <silent> gh :Lspsaga lsp_finder<CR>
 
 " utils
 nmap <silent> <Leader>B :call utils#toggle_bracket_mode() <CR>

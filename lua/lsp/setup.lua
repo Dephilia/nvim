@@ -6,8 +6,7 @@
 -- Distributed under terms of the MIT license.
 --
 
--- Utility functions shared between progress reports for LSP and DAP
-
+-- Notify
 local client_notifs = {}
 
 local function get_notif_data(client_id, token)
@@ -92,7 +91,9 @@ vim.lsp.handlers["$/progress"] = function(_, result, ctx)
     notif_data.spinner = nil
   end
 end
+-- End Notify
 
+-- Load lsp list
 local servers = vim.g['lsp_servers']
 
 require("nvim-lsp-installer").setup({
@@ -110,6 +111,16 @@ require("nvim-lsp-installer").setup({
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local navic = require("nvim-navic")
+
+-- Rounded hover
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = 'rounded'
+})
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = 'rounded'
+})
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
