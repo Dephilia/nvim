@@ -23,6 +23,10 @@ local function vim_logo()
   return "" -- \ue7c5
 end
 
+local function close_char()
+  return "" -- \uf657
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -34,9 +38,7 @@ require('lualine').setup {
     disabled_filetypes = {},
   },
   sections = {
-    lualine_a = {
-      { 'mode', padding = { left = 2, right = 2 } },
-    },
+    lualine_a = { 'mode' },
     lualine_b = {
       { 'branch', fmt = trunc(90, 30, 60) },
       'diff', 'diagnostics'
@@ -46,9 +48,7 @@ require('lualine').setup {
     },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
-    lualine_z = {
-      { 'location', padding = { left = 2, right = 2 } },
-    }
+    lualine_z = { 'location' }
   },
   inactive_sections = {
     lualine_a = {},
@@ -60,12 +60,10 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = {},
-    lualine_b = {
-      { vim_logo, padding = { left = 2, right = 2 } },
-    },
+    lualine_b = { vim_logo },
     lualine_c = { require 'tabline'.tabline_buffers },
     lualine_x = { require 'tabline'.tabline_tabs },
-    lualine_y = {},
+    lualine_y = { close_char },
     lualine_z = {},
   },
   extensions = {
