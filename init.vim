@@ -1,7 +1,7 @@
 " @Author: Dephilia <me@dephilia.moe>
 " @Date: 2019-10-17 23:45:54
 " @Last Modified by: Dephilia <me@dephilia.moe>
-" @Last Modified time: 2022-06-20 22:09:11
+" @Last Modified time: 2022-06-21 22:50:16
 
 if !has('nvim-0.7.0')
   echohl Error | echomsg "Nvim 0.7.0 required, but is missing!" | echohl None
@@ -69,8 +69,21 @@ augroup dashboard_cfg
   autocmd FileType dashboard nnoremap <buffer> <silent> <Leader>bo :DashboardNewFile<CR>
 
   " hide tilde
-  autocmd FileType dashboard setlocal fillchars+=eob:\ 
   autocmd FileType dashboard setlocal noru
+augroup END
+
+augroup clean_tools
+  autocmd!
+  autocmd FileType dashboard,qf,Outline,vista
+        \ setlocal fillchars+=eob:\  |
+        \ setlocal norelativenumber  |
+        \ setlocal nonumber          |
+        \ setlocal nolist            |
+  autocmd BufEnter NvimTree_*
+        \ setlocal fillchars+=eob:\  |
+        \ setlocal norelativenumber  |
+        \ setlocal nonumber          |
+        \ setlocal nolist            |
 augroup END
 
 " Auto change lualine theme
@@ -190,7 +203,7 @@ set laststatus=2    " Statusbar
 set noshowmode      " hide the -- INSERT --
 set shiftwidth=2    " indent width
 set softtabstop=2   " how many space insert after press tab
-set cmdheight=2     " Higher cmd line
+set cmdheight=1     " Higher cmd line (Set to 1 because notify.nvim)
 set autoindent      " auto indent next line
 set smartindent     " smart indent
 set incsearch       " inc search

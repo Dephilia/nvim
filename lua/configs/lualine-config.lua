@@ -27,25 +27,28 @@ require('lualine').setup {
   options = {
     icons_enabled = true,
     theme = snazzy,
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
+    component_separators = '|',
+    section_separators = { left = '', right = '' },
     always_divide_middle = true,
     globalstatus = true,
     disabled_filetypes = {},
   },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = {
+      { 'mode', padding = { left = 2, right = 2 } },
+    },
     lualine_b = {
       { 'branch', fmt = trunc(90, 30, 60) },
       'diff', 'diagnostics'
     },
     lualine_c = {
-      -- { 'filename', fmt = trunc(90, 30, 80) },
-      { navic.get_location, cond = navic.is_available },
+      { navic.get_location, cond = navic.is_available, fmt = trunc(90, 30, 80) },
     },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'progress' },
-    lualine_z = { 'location' }
+    lualine_z = {
+      { 'location', padding = { left = 2, right = 2 } },
+    }
   },
   inactive_sections = {
     lualine_a = {},
@@ -57,7 +60,9 @@ require('lualine').setup {
   },
   tabline = {
     lualine_a = {},
-    lualine_b = { vim_logo },
+    lualine_b = {
+      { vim_logo, padding = { left = 2, right = 2 } },
+    },
     lualine_c = { require 'tabline'.tabline_buffers },
     lualine_x = { require 'tabline'.tabline_tabs },
     lualine_y = {},
@@ -67,5 +72,7 @@ require('lualine').setup {
     'fzf',
     'nvim-tree',
     'symbols-outline',
+    'quickfix',
+    'fugitive'
   }
 }
