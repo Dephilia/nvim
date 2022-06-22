@@ -28,7 +28,10 @@ return require('packer').startup(function(use)
   }
   use {
     'kdheepak/tabline.nvim',
-    requires = { { 'hoob3rt/lualine.nvim', opt = true }, { 'kyazdani42/nvim-web-devicons', opt = true } },
+    requires = {
+      { 'hoob3rt/lualine.nvim' },
+      { 'kyazdani42/nvim-web-devicons' }
+    },
     config = function()
       require('configs/tabline-config')
     end
