@@ -1,7 +1,7 @@
 " @Author: Dephilia <me@dephilia.moe>
 " @Date: 2019-10-17 23:45:54
 " @Last Modified by: Dephilia <me@dephilia.moe>
-" @Last Modified time: 2022-06-21 23:03:02
+" @Last Modified time: 2022-06-22 20:17:46
 
 if !has('nvim-0.7.0')
   echohl Error | echomsg "Nvim 0.7.0 required, but is missing!" | echohl None
@@ -59,6 +59,8 @@ let g:smoothie_enabled = 0
 " Theme settings
 let g:SnazzyTransparent = 1
 let g:tokyonight_style = "night"
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
 
 " Auto command
 " Description: Auto commands
@@ -74,10 +76,14 @@ augroup END
 
 augroup clean_tools
   autocmd!
-  autocmd FileType dashboard,qf,Outline,vista
+  autocmd FileType dashboard,Outline,vista
         \ setlocal fillchars+=eob:\  |
         \ setlocal norelativenumber  |
         \ setlocal nonumber          |
+        \ setlocal nolist
+  autocmd FileType qf
+        \ setlocal fillchars+=eob:\  |
+        \ setlocal norelativenumber  |
         \ setlocal nolist
   autocmd BufEnter NvimTree_*
         \ setlocal fillchars+=eob:\  |
@@ -93,13 +99,6 @@ augroup colorsheme_chain
   autocmd ColorScheme nord       lua require('lualine').setup { options = { theme = 'nord'                    }}
   autocmd ColorScheme catppuccin lua require('lualine').setup { options = { theme = 'catppuccin'              }}
   autocmd ColorScheme tokyonight lua require('lualine').setup { options = { theme = 'tokyonight'              }}
-augroup END
-
-" Treesitter folding. nvim_treesitter#foldexpr() can only called after load
-" the plugin configuration.
-augroup ts_folding
-  autocmd!
-  autocmd BufEnter * setl foldexpr=nvim_treesitter#foldexpr()
 augroup END
 
 " Hightlight
@@ -167,6 +166,14 @@ nmap <Leader>e <cmd> lua require'hop'.hint_words({ hint_position = require'hop.h
 vmap <Leader>e <cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END })<cr>
 omap <Leader>e <cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.END, inclusive_jump = true })<cr>
 
+" Trouble
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+
 " LSP mappings
 " Ref to lua/lsp/setup.lua
 "    and lua/lsp/nvim-cmp.lua
@@ -227,8 +234,9 @@ set list listchars+=precedes:«
 set list listchars+=extends:»
 
 " Folding
+set foldenable
 set foldlevel=99
-set foldmethod=expr
+set fillchars+=fold:\ ,foldopen:,foldsep:\ ,foldclose:
 
 " GUI Settings
 " Description: Only for GUI
