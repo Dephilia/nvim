@@ -1,7 +1,7 @@
 " @Author: Dephilia <me@dephilia.moe>
 " @Date: 2019-10-17 23:45:54
 " @Last Modified by: Dephilia <me@dephilia.moe>
-" @Last Modified time: 2022-06-22 20:17:46
+" @Last Modified time: 2022-06-23 21:30:42
 
 if !has('nvim-0.7.0')
   echohl Error | echomsg "Nvim 0.7.0 required, but is missing!" | echohl None
@@ -148,6 +148,9 @@ nnoremap <silent> bp :bprevious<CR>
 " 5. Close buffer
 nnoremap <silent> bd :bdelete<CR>
 
+" Quickfix mapping
+nnoremap <silent> <F2> :call utils#toggle_quickfix()<CR>
+
 " easy align
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
@@ -203,13 +206,9 @@ syntax enable
 "=============================="
 set background=dark " background
 set encoding=UTF-8  " coding
-set expandtab       " <tab> as many <space>
-set tabstop=2       " width of tab
 set showtabline=2   " Tabline
 set laststatus=2    " Statusbar
 set noshowmode      " hide the -- INSERT --
-set shiftwidth=2    " indent width
-set softtabstop=2   " how many space insert after press tab
 set cmdheight=1     " Higher cmd line (Set to 1 because notify.nvim)
 set autoindent      " auto indent next line
 set smartindent     " smart indent
@@ -223,6 +222,12 @@ set hidden          " Hide edited buffer
 set updatetime=300  " Short update time
 set shortmess+=c    " Supress ins-completion msg
 set tags=./tags,./TAGS,tags;~,TAGS;~ " Tags location
+
+" Tab
+set noexpandtab    " Use tab
+set tabstop=8      " Tab width. Default 8
+set shiftwidth=4   " Input tab width.
+set softtabstop=-1 " Follow shiftwidth setting
 
 " Show hide chars
 set list listchars+=tab:→\ 

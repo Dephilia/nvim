@@ -70,3 +70,11 @@ command! -nargs=0 HexModeDisable :call utils#hexmode_disable()
 
 " Clear Additional Space
 command! -nargs=0 ClearSpaces :%s/\s\+$//e
+
+function! utils#toggle_quickfix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
