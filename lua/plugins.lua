@@ -188,10 +188,7 @@ return require('packer').startup(function(use)
 
   use {
     'kevinhwang91/nvim-ufo',
-    requires = 'kevinhwang91/promise-async',
-    config = function()
-      require('ufo').setup()
-    end
+    requires = 'kevinhwang91/promise-async'
   }
 
   use {
