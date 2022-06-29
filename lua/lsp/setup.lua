@@ -165,6 +165,7 @@ local on_attach = function(client, bufnr)
   else
     vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
   end
+  vim.keymap.set('x', '<space>f', vim.lsp.buf.range_formatting, bufopts)
 end
 
 local lua_settings = {
