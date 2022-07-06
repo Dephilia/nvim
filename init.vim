@@ -1,7 +1,7 @@
 " @Author: Dephilia <me@dephilia.moe>
 " @Date: 2019-10-17 23:45:54
 " @Last Modified by: Dephilia <me@dephilia.moe>
-" @Last Modified time: 2022-06-23 21:30:42
+" @Last Modified time: 2022-07-06 21:57:42
 
 if !has('nvim-0.7.0')
   echohl Error | echomsg "Nvim 0.7.0 required, but is missing!" | echohl None
@@ -189,7 +189,8 @@ nnoremap gr <cmd>TroubleToggle lsp_references<cr>
 nmap <silent> <Leader>B :call utils#toggle_bracket_mode() <CR>
 
 " hidden char
-nmap <silent> <Leader>H :set list! <CR>
+nmap <silent> <Leader>h :set list! <CR>
+nmap <silent> <Leader>H :call utils#cleanmode_toggle() <CR>
 
 " Default colorsheme
 " Description: Use snazzy default

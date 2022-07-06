@@ -1,5 +1,6 @@
 " Auto add bracket
 let s:AutoBracketEnable = 0
+let s:CleanModeEnable = 0
 
 function! utils#toggle_bracket_mode()
     if s:AutoBracketEnable
@@ -23,24 +24,39 @@ function! utils#toggle_bracket_mode()
     endif
 endfunction
 
-" Copymode -> Toggle hidden char to be visible
-function! utils#copymode_enable()
+" Cleanmode -> Toggle hidden char to be visible
+function! utils#cleanmode_enable()
   set norelativenumber
   set nonumber
   set nolist
-  call gitgutter#disable()
-  call v:lua.vim.notify("Enable Copy Mode", "info", {'title': 'neovim utils'})
+  lua require("indent_blankline.commands").disable("<bang>" == "!")
+  lua package.loaded.gitsigns.detach()
+  call v:lua.vim.notify("Enable Clean Mode", "info", {'title': 'neovim utils'})
+  let s:CleanModeEnable = 1
 endfunction
-command! -nargs=0 CopyModeEnable :call utils#copymode_enable()
+command! -nargs=0 CleanModeEnable :call utils#cleanmode_enable()
 
-function! utils#copymode_disable()
+function! utils#cleanmode_disable()
   set relativenumber
   set number
   set list
-  call gitgutter#enable()
-  call v:lua.vim.notify("Disable Copy Mode", "info", {'title': 'neovim utils'})
+  let g:indentLine_enabled = v:true
+  lua require("indent_blankline.commands").enable("<bang>" == "!")
+  lua package.loaded.gitsigns.attach()
+  call v:lua.vim.notify("Disable Clean Mode", "info", {'title': 'neovim utils'})
+  let s:CleanModeEnable = 0
 endfunction
-command! -nargs=0 CopyModeDisable :call utils#copymode_disable()
+command! -nargs=0 CleanModeDisable :call utils#cleanmode_disable()
+
+function! utils#cleanmode_toggle()
+    if s:CleanModeEnable
+	call utils#cleanmode_disable()
+    else
+	call utils#cleanmode_enable()
+    endif
+endfunction
+command! -nargs=0 CleanModeToggle :call utils#cleanmode_toggle()
+
 
 " Hex Modified
 function! utils#hexmode_enable()
