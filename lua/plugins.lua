@@ -216,7 +216,7 @@ return require('packer').startup(function(use)
 
   -- -- Themes
   use { 'connorholyday/vim-snazzy' }
-  use { 'arcticicestudio/nord-vim' }
+  use { 'shaunsingh/nord.nvim' }
   use {
     "catppuccin/nvim",
     as = "catppuccin"
