@@ -1,7 +1,5 @@
-" @Author: Dephilia <me@dephilia.moe>
-" @Date: 2019-10-17 23:45:54
-" @Last Modified by: Dephilia <me@dephilia.moe>
-" @Last Modified time: 2022-07-06 21:57:42
+" (c) 2022 Dephilia
+" MIT license (See LICENSE for details)
 
 if !has('nvim-0.7.0')
   echohl Error | echomsg "Nvim 0.7.0 required, but is missing!" | echohl None
@@ -99,6 +97,7 @@ augroup colorsheme_chain
   autocmd ColorScheme nord       lua require('lualine').setup { options = { theme = 'nord'                    }}
   autocmd ColorScheme catppuccin lua require('lualine').setup { options = { theme = 'catppuccin'              }}
   autocmd ColorScheme tokyonight lua require('lualine').setup { options = { theme = 'tokyonight'              }}
+  autocmd ColorScheme kanagawa   lua require('lualine').setup { options = { theme = 'kanagawa'                }}
 augroup END
 
 " Hightlight

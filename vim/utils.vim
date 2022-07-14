@@ -1,3 +1,6 @@
+" (c) 2022 Dephilia
+" MIT license (See LICENSE for details)
+
 " Auto add bracket
 let s:AutoBracketEnable = 0
 let s:CleanModeEnable = 0

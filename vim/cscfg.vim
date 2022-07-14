@@ -1,3 +1,6 @@
+" (c) 2022 Dephilia
+" MIT license (See LICENSE for details)
+
 " Remember to run `cscope -Rbqk` First
 set cscopetag
 set csto=0

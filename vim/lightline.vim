@@ -1,3 +1,6 @@
+" (c) 2022 Dephilia
+" MIT license (See LICENSE for details)
+
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction

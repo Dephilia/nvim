@@ -1,7 +1,7 @@
 #! /usr/bin/env lua
 --
 -- nvim-cmp.lua
--- Copyright (C) 2022 dephilia <dephilia@MacBook-Pro.local>
+-- Copyright (C) 2022 Dephilia
 --
 -- Distributed under terms of the MIT license.
 --

@@ -1,7 +1,7 @@
 #! /usr/bin/env lua
 --
--- llcfg.lua
--- Copyright (C) 2022 dephilia <dephilia@MacBook-Pro.local>
+-- lualine-config.lua
+-- Copyright (C) 2022 Dephilia
 --
 -- Distributed under terms of the MIT license.
 

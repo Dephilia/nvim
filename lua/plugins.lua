@@ -1,7 +1,7 @@
 #! /usr/bin/env lua
 --
--- packers.lua
--- Copyright (C) 2022 dephilia <dephilia@MacBook-Pro.local>
+-- plugins.lua
+-- Copyright (C) 2022 Dephilia
 --
 -- Distributed under terms of the MIT license.
 --
@@ -222,6 +222,7 @@ return require('packer').startup(function(use)
     as = "catppuccin"
   }
   use { 'folke/tokyonight.nvim' }
+  use { 'rebelot/kanagawa.nvim' }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
