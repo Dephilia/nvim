@@ -61,8 +61,8 @@ db.custom_center = {
   },
 }
 
-vim.highlight.create('DashboardHeader', { guifg = '#A0E7E5' }, false)
-vim.highlight.create('DashboardCenter', { guifg = '#FFAEBC' }, false)
-vim.highlight.create('DashboardCenterIcon', { guifg = '#B4F8C8' }, false)
-vim.highlight.create('DashboardShortCut', { guifg = '#FBE7C6' }, false)
-vim.highlight.create('DashboardFooter', { guifg = 'lightgrey' }, false)
+vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#A0E7E5' })
+vim.api.nvim_set_hl(0, 'DashboardCenter', { fg = '#FFAEBC' })
+vim.api.nvim_set_hl(0, 'DashboardCenterIcon', { fg = '#B4F8C8' })
+vim.api.nvim_set_hl(0, 'DashboardShortCut', { fg = '#FBE7C6' })
+vim.api.nvim_set_hl(0, 'DashboardFooter', { fg = 'lightgrey' })

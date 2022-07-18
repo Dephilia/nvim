@@ -100,6 +100,13 @@ augroup colorsheme_chain
   autocmd ColorScheme kanagawa   lua require('lualine').setup { options = { theme = 'kanagawa'                }}
 augroup END
 
+" Relativenumber hook
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != 'i' | set rnu | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave * if &nu | set nornu | endif
+augroup END
+
 " Hightlight
 " Description: Hightlights
 "=============================="
@@ -149,6 +156,9 @@ nnoremap <silent> bd :bdelete<CR>
 
 " Quickfix mapping
 nnoremap <silent> <F2> :call utils#toggle_quickfix()<CR>
+
+" Smoothie
+nnoremap <silent> <Leader><C-s> :call utils#toggle_smoothie()<CR>
 
 " easy align
 nmap ga <Plug>(EasyAlign)
