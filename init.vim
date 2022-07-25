@@ -204,7 +204,7 @@ nmap <silent> <Leader>H :call utils#cleanmode_toggle() <CR>
 " Default colorsheme
 " Description: Use snazzy default
 "=============================="
-colorscheme snazzy
+colorscheme kanagawa
 
 " Syntax Enable
 " Description: Enable syntax default

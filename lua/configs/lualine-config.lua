@@ -5,6 +5,7 @@
 --
 -- Distributed under terms of the MIT license.
 
+---@diagnostic disable-next-line: unused-local
 local snazzy = require('configs/snazzy')
 local navic = require("nvim-navic")
 
@@ -30,7 +31,7 @@ end
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = snazzy,
+    theme = 'kanagawa',
     component_separators = '|',
     section_separators = { left = '', right = '' },
     always_divide_middle = true,
