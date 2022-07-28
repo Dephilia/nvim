@@ -41,7 +41,7 @@ let g:lsp_servers = [
 set termguicolors
 
 " Load Plug
-" Description: Load the plugins by the provider. Default: packer
+" Description: Load the plugins by the provider.
 "=============================="
 lua require('plugins')
 
@@ -202,7 +202,7 @@ nmap <silent> <Leader>h :set list! <CR>
 nmap <silent> <Leader>H :call utils#cleanmode_toggle() <CR>
 
 " Default colorsheme
-" Description: Use snazzy default
+" Description: Use kanagawa default
 "=============================="
 colorscheme kanagawa
 
@@ -247,6 +247,7 @@ set list listchars+=trail:•
 set list listchars+=eol:¶
 set list listchars+=precedes:«
 set list listchars+=extends:»
+set nolist " Default disable
 
 " Folding
 set foldenable
