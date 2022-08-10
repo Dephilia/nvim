@@ -146,8 +146,8 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
@@ -156,8 +156,8 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   -- replace by trouble.nvim
   -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   if vim.fn.has('nvim-0.8.0') == 1 then
@@ -166,6 +166,19 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
   end
   vim.keymap.set('x', '<space>f', vim.lsp.buf.range_formatting, bufopts)
+
+  -- lspsaga
+  vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+  vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
+  vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true })
+  vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+  vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
+  vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
+  vim.keymap.set("n", "gd", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
+  vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
+  vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
+  vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
+  vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
 end
 
 local lua_settings = {
