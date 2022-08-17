@@ -140,7 +140,14 @@ return require('packer').startup(function(use)
     opt = true,
     cmd = { 'Vista', 'Vista!!' }
   }
-  use { 'simrat39/symbols-outline.nvim', opt = true, cmd = { 'SymbolsOutline' } }
+  use {
+      'simrat39/symbols-outline.nvim',
+      opt = true,
+      cmd = { 'SymbolsOutline' },
+      config = function()
+	require("symbols-outline").setup()
+      end
+  }
 
   -- LSP
   use {
