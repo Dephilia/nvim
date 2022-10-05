@@ -132,7 +132,6 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
--- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -156,16 +155,8 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  -- vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  -- replace by trouble.nvim
-  -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  if vim.fn.has('nvim-0.8.0') == 1 then
-    vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
-  else
-    vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
-  end
-  vim.keymap.set('x', '<space>f', vim.lsp.buf.range_formatting, bufopts)
+  vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
+  vim.keymap.set('x', '<space>f', vim.lsp.buf.format, bufopts)
 
   -- lspsaga
   vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
