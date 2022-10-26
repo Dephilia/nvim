@@ -6,15 +6,18 @@
 -- Distributed under terms of the MIT license.
 --
 
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-    install_path })
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
 
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim' }
@@ -72,7 +75,6 @@ return require('packer').startup(function(use)
     end
   }
   use { 'itchyny/vim-gitbranch' }
-  use { 'psliwka/vim-smoothie' }
   use { 'godlygeek/tabular' }
   use { 'tpope/vim-commentary' }
   use { 'tpope/vim-surround' }
@@ -101,10 +103,6 @@ return require('packer').startup(function(use)
       vim.notify = require("notify")
     end
   }
-  use { 'sbdchd/neoformat',
-    opt = true,
-    cmd = { 'Neoformat' }
-  }
   use {
     'skywind3000/asyncrun.vim',
     opt = true,
@@ -113,8 +111,6 @@ return require('packer').startup(function(use)
       vim.g['asyncrun_open'] = 8
     end
   }
-
-  use { 'sheerun/vim-polyglot', opt = true }
 
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -203,16 +199,6 @@ return require('packer').startup(function(use)
     requires = "neovim/nvim-lspconfig"
   }
 
-  -- fzf, the fuzzy finder
-  use {
-    'junegunn/fzf.vim',
-    requires = {
-      {
-        'junegunn/fzf',
-        run = './install --bin'
-      }
-    }
-  }
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -223,11 +209,6 @@ return require('packer').startup(function(use)
 
   -- -- Themes
   use { 'connorholyday/vim-snazzy' }
-  use { 'shaunsingh/nord.nvim' }
-  use {
-    "catppuccin/nvim",
-    as = "catppuccin"
-  }
   use { 'folke/tokyonight.nvim' }
   use { 'rebelot/kanagawa.nvim' }
 

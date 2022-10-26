@@ -50,9 +50,6 @@ lua require('plugins')
 "=============================="
 runtime vim/utils.vim
 
-" Disable default. Enable it for smoooothie scroll
-let g:smoothie_enabled = 0
-
 " Theme settings
 let g:SnazzyTransparent = 1
 let g:tokyonight_style = "night"
@@ -93,8 +90,6 @@ augroup END
 augroup colorsheme_chain
   autocmd!
   autocmd ColorScheme snazzy     lua require('lualine').setup { options = { theme = require('configs/snazzy') }}
-  autocmd ColorScheme nord       lua require('lualine').setup { options = { theme = 'nord'                    }}
-  autocmd ColorScheme catppuccin lua require('lualine').setup { options = { theme = 'catppuccin'              }}
   autocmd ColorScheme tokyonight lua require('lualine').setup { options = { theme = 'tokyonight'              }}
   autocmd ColorScheme kanagawa   lua require('lualine').setup { options = { theme = 'kanagawa'                }}
 augroup END
@@ -129,7 +124,7 @@ nmap <silent> <Leader>t  :SymbolsOutline<CR>
 nmap <silent> <Leader>n  :NvimTreeToggle<CR>
 
 " Find files using Telescope command-line sugar.
-nnoremap <Leader>ft <cmd>Telescope <cr>
+nnoremap <Leader><Leader><Leader> <cmd>Telescope <cr>
 nnoremap <Leader>ff <cmd>Telescope find_files<cr>
 nnoremap <Leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <Leader>fb <cmd>Telescope buffers<cr>
@@ -155,9 +150,6 @@ nnoremap <silent> bd :bdelete<CR>
 
 " Quickfix mapping
 nnoremap <silent> <F2> :call utils#toggle_quickfix()<CR>
-
-" Smoothie
-nnoremap <silent> <Leader><C-s> :call utils#toggle_smoothie()<CR>
 
 " easy align
 nmap ga <Plug>(EasyAlign)
@@ -189,9 +181,6 @@ nnoremap gr <cmd>TroubleToggle lsp_references<cr>
 " Ref to lua/lsp/setup.lua
 "    and lua/lsp/nvim-cmp.lua
 " Note here to prevent from forgetting the settings
-
-" cscope mappings
-" See vim/cscfg.vim
 
 " utils
 nmap <silent> <Leader>B :call utils#toggle_bracket_mode() <CR>

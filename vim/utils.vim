@@ -97,13 +97,3 @@ function! utils#toggle_quickfix()
         cclose
     endif
 endfunction
-
-function! utils#toggle_smoothie()
-    if g:smoothie_enabled == 1
-	let g:smoothie_enabled = 0
-	call v:lua.vim.notify("Disable smoothie", "info", {'title': 'neovim utils'})
-    else
-	let g:smoothie_enabled = 1
-	call v:lua.vim.notify("Enable smoothie", "info", {'title': 'neovim utils'})
-    endif
-endfunction
