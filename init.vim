@@ -49,7 +49,6 @@ lua require('plugins')
 " Description: The settings will load after plugins
 "=============================="
 runtime vim/utils.vim
-runtime vim/cscfg.vim
 
 " Disable default. Enable it for smoooothie scroll
 let g:smoothie_enabled = 0
