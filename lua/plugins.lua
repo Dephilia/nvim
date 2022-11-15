@@ -76,7 +76,12 @@ return require('packer').startup(function(use)
   }
   use { 'itchyny/vim-gitbranch' }
   use { 'godlygeek/tabular' }
-  use { 'tpope/vim-commentary' }
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
   use { 'tpope/vim-surround' }
   use { 'tpope/vim-fugitive' }
   use {
@@ -155,6 +160,7 @@ return require('packer').startup(function(use)
       require('lsp/setup')
     end
   }
+  use { 'jose-elias-alvarez/null-ls.nvim' }
   use {
     'hrsh7th/nvim-cmp',
     config = function()

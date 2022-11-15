@@ -155,8 +155,8 @@ local on_attach = function(client, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
-  vim.keymap.set('x', '<space>f', vim.lsp.buf.format, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+  vim.keymap.set('x', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 
   -- lspsaga
   vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
@@ -165,6 +165,14 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
   vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
 end
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+	null_ls.builtins.formatting.autopep8
+    },
+})
 
 local lua_settings = {
   Lua = {
