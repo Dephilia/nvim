@@ -179,8 +179,13 @@ return require('packer').startup(function(use)
   }
   use {
     'glepnir/lspsaga.nvim',
+    branch = "main",
     config = function()
-      require('lspsaga').init_lsp_saga()
+      require('lspsaga').setup({
+	symbol_in_winbar = {
+	  enable = false,
+	}
+      })
     end
   }
   use {
