@@ -59,18 +59,9 @@ let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
 " Auto command
 " Description: Auto commands
 "=============================="
-augroup dashboard_cfg
-  autocmd!
-  autocmd FileType dashboard nnoremap <buffer> <silent> <Leader>fm :Telescope marks<CR>
-  autocmd FileType dashboard nnoremap <buffer> <silent> <Leader>bo :DashboardNewFile<CR>
-
-  " hide tilde
-  autocmd FileType dashboard setlocal noru
-augroup END
-
 augroup clean_tools
   autocmd!
-  autocmd FileType dashboard,Outline,vista
+  autocmd FileType Outline,vista
         \ setlocal fillchars+=eob:\  |
         \ setlocal norelativenumber  |
         \ setlocal nonumber          |

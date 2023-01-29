@@ -40,12 +40,6 @@ return require('packer').startup(function(use)
     end
   }
   use {
-    'glepnir/dashboard-nvim',
-    config = function()
-      require('configs/dashboard')
-    end
-  }
-  use {
     'kyazdani42/nvim-tree.lua',
     requires = {
       'kyazdani42/nvim-web-devicons',
@@ -126,12 +120,6 @@ return require('packer').startup(function(use)
   }
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
-    requires = {
-      'nvim-treesitter/nvim-treesitter',
-    }
-  }
-  use {
-    'p00f/nvim-ts-rainbow',
     requires = {
       'nvim-treesitter/nvim-treesitter',
     }
