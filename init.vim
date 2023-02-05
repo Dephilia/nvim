@@ -89,7 +89,6 @@ inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
 " Plug mapping
-nmap <silent> <Leader>vv :Vista!!<CR>
 nmap <silent> <Leader>t  :SymbolsOutline<CR>
 nmap <silent> <Leader>n  :NvimTreeToggle<CR>
 
