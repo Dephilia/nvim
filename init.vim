@@ -1,8 +1,8 @@
 " (c) 2022 Dephilia
 " MIT license (See LICENSE for details)
 
-if !has('nvim-0.7.0')
-  echohl Error | echomsg "Nvim 0.7.0 required, but is missing!" | echohl None
+if !has('nvim-0.8.0')
+  echohl Error | echomsg "Nvim 0.8.0 required, but is missing!" | echohl None
   finish
 endif
 
