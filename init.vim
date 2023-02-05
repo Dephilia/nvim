@@ -43,47 +43,26 @@ set termguicolors
 " Load Plug
 " Description: Load the plugins by the provider.
 "=============================="
-lua require('plugins')
+lua << EOF
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+require("lazy").setup("plugins")
+EOF
 
 " Post Configuration
 " Description: The settings will load after plugins
 "=============================="
 runtime vim/utils.vim
-
-" Theme settings
-let g:SnazzyTransparent = 1
-let g:tokyonight_style = "night"
-let g:tokyonight_italic_functions = 1
-let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-
-" Auto command
-" Description: Auto commands
-"=============================="
-augroup clean_tools
-  autocmd!
-  autocmd FileType Outline,vista
-        \ setlocal fillchars+=eob:\  |
-        \ setlocal norelativenumber  |
-        \ setlocal nonumber          |
-        \ setlocal nolist
-  autocmd FileType qf
-        \ setlocal fillchars+=eob:\  |
-        \ setlocal norelativenumber  |
-        \ setlocal nolist
-  autocmd BufEnter NvimTree_*
-        \ setlocal fillchars+=eob:\  |
-        \ setlocal norelativenumber  |
-        \ setlocal nonumber          |
-        \ setlocal nolist
-augroup END
-
-" Auto change lualine theme
-augroup colorsheme_chain
-  autocmd!
-  autocmd ColorScheme snazzy     lua require('lualine').setup { options = { theme = require('configs/snazzy') }}
-  autocmd ColorScheme tokyonight lua require('lualine').setup { options = { theme = 'tokyonight'              }}
-  autocmd ColorScheme kanagawa   lua require('lualine').setup { options = { theme = 'kanagawa'                }}
-augroup END
 
 " Relativenumber hook
 augroup numbertoggle
@@ -210,7 +189,6 @@ set cursorline      " highlight current line
 set hidden          " Hide edited buffer
 set updatetime=300  " Short update time
 set shortmess+=c    " Supress ins-completion msg
-set tags=./tags,./TAGS,tags;~,TAGS;~ " Tags location
 
 " Tab
 set noexpandtab    " Use tab
@@ -232,18 +210,6 @@ set nolist " Default disable
 set foldenable
 set foldlevel=99
 set fillchars+=fold:\ ,foldopen:,foldsep:\ ,foldclose:
-
-" GUI Settings
-" Description: Only for GUI
-"=============================="
-if has('gui_running')
-  set guifont=Mononoki\ Nerd\ Font\ mono:h14
-endif
-if exists('g:neovide')
-  set guifont=Mononoki\ Nerd\ Font\ mono:h14
-  let g:neovide_transparency=0.9
-  let g:neovide_cursor_vfx_mode='railgun'
-endif
 
 " END
 "=============================="
