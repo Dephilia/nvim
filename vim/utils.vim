@@ -97,3 +97,9 @@ function! utils#toggle_quickfix()
         cclose
     endif
 endfunction
+
+" Show current path
+function! utils#show_file_path()
+  execute('echo @%')
+endfunction
+command! -nargs=0 ShowPath :call utils#show_file_path()
