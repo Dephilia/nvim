@@ -156,13 +156,9 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
   vim.keymap.set('x', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-
-  -- lspsaga
-  vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
-  vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
-  vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true })
-  vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
-  vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, bufopts)
 end
 
 local null_ls = require("null-ls")
@@ -207,6 +203,4 @@ for _, lsp in pairs(servers) do
     on_attach = on_attach,
     capabilities = capabilities,
     settings = lang_config(lsp)
-  }
-  require('lspconfig')[lsp].setup(S)
-end
+  } require('lspconfig')[lsp].setup(S) end
