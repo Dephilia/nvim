@@ -96,16 +96,20 @@ end
 -- Load lsp list
 local servers = vim.g['lsp_servers']
 
-require("nvim-lsp-installer").setup({
+require("mason").setup({
   ensure_installed = servers,
   automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-  ui = {
-    icons = {
-      server_installed = "✓",
-      server_pending = "➜",
-      server_uninstalled = "✗"
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
     }
-  }
+})
+
+require("mason-lspconfig").setup({
+  ensure_installed = servers
 })
 
 -- Setup lspconfig.
@@ -191,7 +195,7 @@ local lua_settings = {
 }
 
 local function lang_config(lang)
-  if lang == 'sumneko_lua' then return lua_settings
+  if lang == 'lua_ls' then return lua_settings
     -- Add other language specified configuration here
   else return nil
   end

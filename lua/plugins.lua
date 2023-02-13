@@ -100,7 +100,8 @@ return {
 
   -- LSP
   'jose-elias-alvarez/null-ls.nvim',
-  'williamboman/nvim-lsp-installer',
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
   {
     'neovim/nvim-lspconfig',
     config = function()

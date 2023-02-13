@@ -31,7 +31,7 @@ let g:treesitter_langs = [
 let g:lsp_servers = [
       \ 'pyright',
       \ 'clangd',
-      \ 'sumneko_lua',
+      \ 'lua_ls',
       \ 'rust_analyzer',
       \ 'bashls',
       \ 'html',
