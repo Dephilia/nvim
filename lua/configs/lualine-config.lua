@@ -25,7 +25,7 @@ local function vim_logo()
 end
 
 local function close_char()
-  return "" -- \uf657
+  return "󰱞" -- \uf0c5e
 end
 
 require('lualine').setup {
