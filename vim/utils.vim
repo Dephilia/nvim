@@ -32,7 +32,7 @@ function! utils#cleanmode_enable()
   set norelativenumber
   set nonumber
   set nolist
-  lua require("indent_blankline.commands").disable("<bang>" == "!")
+  IBLDisable
   lua package.loaded.gitsigns.detach()
   call v:lua.vim.notify("Enable Clean Mode", "info", {'title': 'neovim utils'})
   let s:CleanModeEnable = 1
@@ -44,7 +44,7 @@ function! utils#cleanmode_disable()
   set number
   set list
   let g:indentLine_enabled = v:true
-  lua require("indent_blankline.commands").enable("<bang>" == "!")
+  IBLEnable
   lua package.loaded.gitsigns.attach()
   call v:lua.vim.notify("Disable Clean Mode", "info", {'title': 'neovim utils'})
   let s:CleanModeEnable = 0
