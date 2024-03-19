@@ -29,6 +29,7 @@ let g:treesitter_langs = [
       \ 'vim',
       \ ]
 let g:lsp_servers = [
+      \ 'ruff_lsp',
       \ 'pyright',
       \ 'clangd',
       \ 'lua_ls',

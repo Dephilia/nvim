@@ -142,7 +142,9 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-  navic.attach(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -163,13 +165,19 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, bufopts)
+
+  if client.name == 'ruff_lsp' then
+    -- Disable hover in favor of Pyright
+    client.server_capabilities.hoverProvider = false
+  end
 end
 
 local null_ls = require("null-ls")
 
 null_ls.setup({
     sources = {
-	null_ls.builtins.formatting.autopep8
+	-- null_ls.builtins.formatting.autopep8
+	-- null_ls.builtins.diagnostics.mypy,
     },
 })
 

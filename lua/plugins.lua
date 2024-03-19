@@ -97,7 +97,7 @@ return {
   },
 
   -- LSP
-  'jose-elias-alvarez/null-ls.nvim',
+  'nvimtools/none-ls.nvim',
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
   {
