@@ -129,6 +129,24 @@ Managed by `vim.pack` (`:packupdate`). Lockfile: `nvim-pack-lock.json`.
 | nvim-navic | Breadcrumbs in lualine |
 | nvim-web-devicons + plenary.nvim | Icons / Lua utils |
 
+## Offline bundle
+
+GitHub Actions builds a tarball of this config plus `~/.local/share/nvim` plugins (`vim.pack`) and mason language servers. Artifacts are per OS/arch (`linux-x86_64`, `darwin-arm64`).
+
+- Push to `main` or run **offline-bundle** from Actions: download the artifact.
+- Push a `v*` tag: same tarball is attached to the GitHub Release.
+- Local: `./scripts/bundle.sh` writes `dist/nvim-offline-$(uname -s)-$(uname -m).tar.gz`.
+
+On the offline machine (Neovim 0.12+ already installed):
+
+```sh
+tar -xzf nvim-offline-darwin-arm64.tar.gz
+cd nvim-offline-darwin-arm64
+./install.sh
+```
+
+That copies `config/` to `~/.config/nvim` and `data/site` + `data/mason` to `~/.local/share/nvim`. Mason binaries are **not** portable across OS/arch — use the matching artifact. `ty` is brew-only and is not in the bundle.
+
 ## Defaults we do **not** set
 
 These already match Neovim 0.12, so setting them does nothing: `cmdheight`, `hidden`, `list`, `incsearch`, `hlsearch`, `autoindent`, `foldenable`.
