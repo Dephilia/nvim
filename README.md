@@ -131,10 +131,11 @@ Managed by `vim.pack` (`:packupdate`). Lockfile: `nvim-pack-lock.json`.
 
 ## Offline bundle
 
-GitHub Actions builds a tarball of this config plus `~/.local/share/nvim` plugins (`vim.pack`) and mason language servers. Artifacts are per OS/arch (`linux-x86_64`, `darwin-arm64`).
+GitHub Actions builds tarballs of this config plus `vim.pack` plugins and mason language servers (`linux-x86_64`, `darwin-arm64`).
 
-- Push to `main` or run **offline-bundle** from Actions: download the artifact.
-- Push a `v*` tag: same tarball is attached to the GitHub Release.
+- **Run workflow** on **offline-bundle** (or push tag `latest`): replaces the single GitHub Release [`latest`](https://github.com/Dephilia/nvim/releases/tag/latest). The release *title* is the UTC date (`YYYY-MM-DD`); both OS tarballs are attached.
+- Push to `main`: artifacts only (no release).
+- Push a `v*` tag: a separate versioned release.
 - Local: `./scripts/bundle.sh` writes `dist/nvim-offline-$(uname -s)-$(uname -m).tar.gz`.
 
 On the offline machine (Neovim 0.12+ already installed):

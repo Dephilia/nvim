@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    tags: ['v*']
+    tags: ['v*', 'latest']
 
 permissions:
   contents: read
@@ -50,7 +50,7 @@ jobs:
           if-no-files-found: error
 
   release:
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.ref, 'refs/tags/')
     needs: bundle
     runs-on: ubuntu-latest
     permissions:
@@ -65,8 +65,20 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" artifacts/*.tar.gz \
-            --repo "${GITHUB_REPOSITORY}" \
-            --title "${GITHUB_REF_NAME}" \
-            --generate-notes \
-            --verify-tag
+          set -euo pipefail
+          DATE="$(date -u +%Y-%m-%d)"
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ] || [ "${GITHUB_REF_NAME}" = "latest" ]; then
+            if gh release view latest --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+              gh release delete latest --repo "${GITHUB_REPOSITORY}" --yes
+            fi
+            gh release create latest artifacts/*.tar.gz \
+              --repo "${GITHUB_REPOSITORY}" \
+              --title "${DATE}" \
+              --notes "Offline Neovim bundle (${DATE}). Contains linux-x86_64 and darwin-arm64 tarballs." \
+              --latest
+          else
+            gh release create "${GITHUB_REF_NAME}" artifacts/*.tar.gz \
+              --repo "${GITHUB_REPOSITORY}" \
+              --title "${GITHUB_REF_NAME}" \
+              --generate-notes
+          fi
