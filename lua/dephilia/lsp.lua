@@ -18,6 +18,7 @@ require('mason-lspconfig').setup({
     'rust_analyzer',
     'bashls',
     'html',
+    'jsonls',
     'ts_ls',
     'ruff',
   },

@@ -106,6 +106,7 @@ blink.cmp uses `C-j` / `C-k` while the completion menu is open. Arrow keys work 
 | `rust_analyzer` | mason | Rust |
 | `bashls` | mason | Bash |
 | `html` | mason | HTML |
+| `jsonls` | mason | JSON / JSONC |
 | `ts_ls` | mason | TypeScript / JavaScript |
 
 ## Plugins
